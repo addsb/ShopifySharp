@@ -99,13 +99,21 @@ namespace ShopifySharp
         {
             IRestRequest req = RequestEngine.CreateRequest("customers.json", Method.POST, "customer");
 
-            //Build the request body
-            Dictionary<string, object> body = new Dictionary<string, object>(options?.ToDictionary() ?? new Dictionary<string, object>())
-            {
-                { "customer", customer }
-            };
+            // Build the request body as a dictionary. Necessary because the create options must be added to the 
+            // 'customer' property in order to create customer account along with customer record.
+            var customerBody = customer.ToDictionary();
 
-            req.AddJsonBody(body);
+            if (options != null)
+            {
+                foreach (var kvp in options.ToDictionary())
+                {
+                    customerBody.Add(kvp);
+                }
+            }
+
+            var requestBody = new { customer = customerBody };
+
+            req.AddJsonBody(requestBody);
 
             return await RequestEngine.ExecuteRequestAsync<ShopifyCustomer>(_RestClient, req);
         }
@@ -114,12 +122,25 @@ namespace ShopifySharp
         /// Updates the given <see cref="ShopifyCustomer"/>. Id must not be null.
         /// </summary>
         /// <param name="customer">The <see cref="ShopifyCustomer"/> to update.</param>
+        /// <param name="options">The <see cref="ShopifyCustomerCreateOptions"/> to update.</param>
         /// <returns>The updated <see cref="ShopifyCustomer"/>.</returns>
-        public async Task<ShopifyCustomer> UpdateAsync(ShopifyCustomer customer)
+        public async Task<ShopifyCustomer> UpdateAsync(ShopifyCustomer customer, ShopifyCustomerCreateOptions options = null)
         {
             IRestRequest req = RequestEngine.CreateRequest($"customers/{customer.Id.Value}.json", Method.PUT, "customer");
 
-            req.AddJsonBody(new { customer });
+            var customerBody = customer.ToDictionary();
+
+            if (options != null)
+            {
+                foreach (var kvp in options.ToDictionary())
+                {
+                    customerBody.Add(kvp);
+                }
+            }
+
+            var requestBody = new { customer = customerBody };
+
+            req.AddJsonBody(requestBody);
 
             return await RequestEngine.ExecuteRequestAsync<ShopifyCustomer>(_RestClient, req);
         }
