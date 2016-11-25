@@ -78,6 +78,8 @@ With that said, this library is still pretty new. It currently suppports the fol
 - [Smart Collections](#smart-collections)
 - [Product Variants](#product-variants)
 - [Blogs](#blogs)
+- [Application Credits](#application-credits)
+- [Articles](#articles)
 
 More functionality will be added each week until it reachs full parity with Shopify's REST API.
 
@@ -88,7 +90,6 @@ The following APIs are not yet implemented by ShopifySharp, but I'm slowly worki
 | API | Notes |
 |-----|-------|
 | [AbandonedCheckouts](https://help.shopify.com/api/reference/abandoned_checkouts) | |
-| [Articles](https://help.shopify.com/api/reference/article) | |
 | [CarrierService](https://help.shopify.com/api/reference/carrierservice) | |
 | [Comments](https://help.shopify.com/api/reference/comment) | |
 | [Country](https://help.shopify.com/api/reference/country) | |
@@ -120,6 +121,7 @@ These generous people have contributed their own hard work and time to improving
 - [Angel Arriaga](https://github.com/damazoarriaga)
 - [Shaju Mohammed](https://github.com/shajumohamed)
 - [Jono](https://github.com/mrjono1)
+- [Tommy Holm Jakobsen](https://github.com/thj-dk)
 
 Thank you!
 
@@ -664,6 +666,14 @@ await service.CloseAsync(orderId);
 var service = new ShopifyOrderService(myShopifyUrl, shopAccessToken);
 
 await service.OpenAsync(orderId);
+```
+
+### Cancel an order
+
+```cs
+var service = new ShopifyOrderService(myShopifyUrl, shopAccessToken);
+
+await service.CancelAsync(orderId);
 ```
 
 ## Products
@@ -1824,7 +1834,7 @@ await service.DeleteAsync(productId, variantId);
 
 ## Blogs
 
-In addition to an online storefront, Shopify shops come with a built-in blogging engine, allowing a shop to have one or more blogs. **This service is for interacting with blogs themselves, not blog posts**.
+In addition to an online storefront, Shopify shops come with a built-in blogging engine, allowing a shop to have one or more blogs. **This service is for interacting with blogs themselves, not [blog posts](#articles)**.
 
 ### Creating a Blogs
 
@@ -1836,14 +1846,14 @@ var blog = await service.CreateAsync(new ShopifyBlog()
 });
 ```
 
-### Getting a Blogs
+### Getting a Blog
 
 ```cs
 var service = new ShopifyBlogService(myShopifyUrl, shopAccessToken);
 var blog = await service.GetAsync(blogId);
 ```
 
-### Updating a Blogs
+### Updating a Blog
 
 ```cs
 var service = new ShopifyBlogService(myShopifyUrl, shopAccessToken);
@@ -1873,6 +1883,123 @@ var count = await service.CountAsync();
 var service = new ShopifyBlogService(myShopifyUrl, shopAccessToken);
 
 await service.DeleteAsync(blogId);
+```
+
+## Articles
+
+Articles are objects representing a blog post. Each article belongs to a [Blog](#blogs).
+
+### Creating an Article
+
+```cs
+var service = new ShopifyArticleService(myShopifyUrl, shopAccessToken);
+var article = await service.CreateAsync(blogId, new ShopifyArticle()
+{
+    Title = "My new Article title",
+    Author = "John Smith",
+    Tags = "This Post, Has Been Tagged",
+    BodyHtml = "<h1>Hello world!</h1>",
+    Image = new ShopifyArticleImage()
+    {
+        Attachment = "R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\n"
+    }
+});
+```
+
+### Getting an Article
+
+```cs
+var service = new ShopifyArticleService(myShopifyUrl, shopAccessToken);
+var article = await service.GetAsync(blogId, articleId);
+```
+
+### Updating an Article
+
+```cs
+var service = new ShopifyArticleService(myShopifyUrl, shopAccessToken);
+var article = await service.GetAsync(blogId, articleId);
+
+article.Title = "My new title";
+article = await service.UpdateAsync(blogId, articleId);
+```
+
+### Listing Articles
+
+```cs
+var service = new ShopifyArticleService(myShopifyUrl, shopAccessToken);
+var articles = await service.ListAsync(blogId);
+```
+
+### Counting Articles
+
+```cs
+var service = new ShopifyArticleService(myShopifyUrl, shopAccessToken);
+var count = await service.CountAsync(blogId);
+```
+
+### Deleting an Article
+
+```cs
+var service = new ShopifyArticleService(myShopifyUrl, shopAccessToken);
+
+await service.DeleteAsync(blogId, articleId);
+```
+
+### Listing all Article authors
+
+```cs
+var service = new ShopifyArticleService(myShopifyUrl, shopAccessToken);
+IEnumerable<string> authors = await service.ListAuthorsAsync();
+```
+
+### Listing all Article tags
+
+```cs
+var service = new ShopifyArticleService(myShopifyUrl, shopAccessToken);
+IEnumerable<string> tags = await service.ListTagsAsync();
+```
+
+### Listing all Article tags for a single Blog
+
+```cs
+var service = new ShopifyArticleService(myShopifyUrl, shopAccessToken);
+IEnumerable<string> tags = await service.ListTagsForBlogAsync(blogId);
+```
+
+## Application Credits
+
+Shopify's Application Credit API lets you offer credits for payments your app customers have made via the Application Charge, Recurring Application Charge, and Usage Charge APIs.
+
+The total amount of all Application Credits created by an application must not exceed:
+
+1. Total amount paid to the application by the shop owner in the last 30 days.
+2. Total amount of pending receivables in the partner account associated with the application.
+
+Additionally, Application Credits cannot be used by private applications.
+
+### Creating an Application Credit
+
+```cs
+var service = new ShopifyApplicationCreditService(myShopifyUrl, shopAccessToken);
+var credit = await service.CreateAsync(new ShopifyApplicationCredit() 
+{
+    Description = "Refund for Foo",
+    Amount = 10.00m
+});
+```
+
+### Getting an Application Credit
+
+```cs
+var service = new ShopifyApplicationCreditService(myShopifyUrl, shopAccessToken);
+var charge = await service.GetAsync(creditId);
+```
+
+### Listing Application Credits
+
+```cs
+var service = new ShopifyApplicationCreditService(myShopifyUrl, shopAccessToken);
+var charges = await service.ListAsync();
 ```
 
 # "Why don't you use enums?"
