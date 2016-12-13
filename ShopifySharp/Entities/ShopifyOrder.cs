@@ -258,7 +258,7 @@ namespace ShopifySharp
         /// The sum of all the prices of all the items in the order, in USD, with taxes and discounts included (must be positive).
         /// </summary>
         [JsonProperty("total_price_usd")]
-        public double TotalPriceUsd { get; set; }
+        public double? TotalPriceUsd { get; set; }
 
         /// <summary>
         /// The sum of all the taxes applied to the order (must be positive).
