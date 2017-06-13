@@ -111,5 +111,11 @@ namespace ShopifySharp
         /// </summary>
         [JsonProperty("metafields")]
         public IEnumerable<ShopifyMetaField> Metafields { get; set; }
+
+        /// <summary>
+        /// List of published channels
+        /// </summary>
+        [JsonProperty("publications")]
+        public IEnumerable<ShopifyProductPublications> Publications { get; set; }
     }
 }
