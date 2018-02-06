@@ -105,11 +105,5 @@ namespace ShopifySharp
         /// </summary>
         [JsonProperty("images")]
         public IEnumerable<ProductImage> Images { get; set; }
-
-        /// <summary>
-        /// List of published channels
-        /// </summary>
-        [JsonProperty("publications")]
-        public IEnumerable<ShopifyProductPublications> Publications { get; set; }
     }
 }
