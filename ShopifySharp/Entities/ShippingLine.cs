@@ -22,6 +22,12 @@ namespace ShopifySharp
         public string Code { get; set; }
 
         /// <summary>
+        /// The phone number used for the shipment.
+        /// </summary>
+        [JsonProperty("phone")]
+        public string Phone { get; set; }
+
+        /// <summary>
         /// The price of this shipping method.
         /// </summary>
         [JsonProperty("price")]
@@ -32,6 +38,12 @@ namespace ShopifySharp
         /// </summary>
         [JsonProperty("discounted_price")]
         public decimal? DiscountedPrice { get; set; }
+
+        /// <summary>
+        /// An ordered list of amounts allocated by discount applications. Each discount allocation is associated to a particular discount application.
+        /// </summary>
+        [JsonProperty("discount_allocations")]
+        public IEnumerable<DiscountAllocation> DiscountAllocations { get; set; }
 
         /// <summary>
         /// The source of the shipping method.

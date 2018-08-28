@@ -51,6 +51,12 @@ namespace ShopifySharp
         public string FulfillmentService { get; set; }
 
         /// <summary>
+        /// The unique identifier for the inventory item, which is used in the Inventory API to query for inventory information.
+        /// </summary>
+        [JsonProperty("inventory_item_id")]
+        public long? InventoryItemId { get; set; }
+
+        /// <summary>
         /// Specifies whether or not Shopify tracks the number of items in stock for this product variant. Known values are 'blank' and 'shopify'.
         /// </summary>
         [JsonProperty("inventory_management")]
@@ -118,6 +124,7 @@ namespace ShopifySharp
 
         /// <summary>
         /// The number of items in stock for this product variant.
+        /// NOTE: After 2018-07-01, this field will be read-only in the Shopify API. Use the `InventoryLevelService` instead.
         /// </summary>
         [JsonProperty("inventory_quantity")]
         public int? InventoryQuantity { get; set; }
@@ -127,6 +134,7 @@ namespace ShopifySharp
         /// This should be sent to avoid a race condition when the item being adjusted is simultaneously sold online.
         /// </summary>
         [JsonProperty("old_inventory_quantity")]
+        [Obsolete("Use the Inventory Level endpoint instead")]
         public int? OldInventoryQuantity { get; set; }
 
         /// <summary>
@@ -134,6 +142,7 @@ namespace ShopifySharp
         /// If an adjustment value is sent it will take priority.
         /// </summary>
         [JsonProperty("inventory_quantity_adjustment")]
+        [Obsolete("Use the Inventory Level endpoint instead")]
         public int? InventoryQuantityAdjustment { get; set; }
 
         /// <summary>
@@ -153,5 +162,13 @@ namespace ShopifySharp
         /// </summary>
         [JsonProperty("weight_unit")]
         public string WeightUnit { get; set; }
+
+        /// <summary>
+        /// Additional metadata about the <see cref="ProductVariant"/>. Note: This is not naturally returned with a <see cref="ProductVariant"/> response, as
+        /// Shopify will not return <see cref="ProductVariant"/> metafields unless specified. Instead, you need to query metafields with <see cref="MetaFieldService"/>. 
+        /// Uses include: Creating, updating, & deserializing webhook bodies that include them.
+        /// </summary>
+        [JsonProperty("metafields")]
+        public IEnumerable<MetaField> Metafields { get; set; }
     }
 }
