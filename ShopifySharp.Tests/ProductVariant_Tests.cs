@@ -58,7 +58,8 @@ namespace ShopifySharp.Tests
         [Fact]
         public async Task Gets_Variants()
         {
-            var created = await Fixture.Service.GetAsync(Fixture.Created.First().Id.Value);
+            var created = await Fixture.Create();
+            created = await Fixture.Service.GetAsync(created.Id.Value);
 
             Assert.NotNull(created);
             Assert.True(created.Id.HasValue);
@@ -149,7 +150,7 @@ namespace ShopifySharp.Tests
             var obj = await Service.CreateAsync(ProductId, new ProductVariant()
             {
                 Option1 = Guid.NewGuid().ToString(),
-                Price = Price,
+                Price = Price
             });
 
             if (! skipAddToCreatedList)
