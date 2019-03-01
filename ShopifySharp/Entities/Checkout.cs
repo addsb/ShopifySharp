@@ -69,11 +69,12 @@ namespace ShopifySharp
         [JsonProperty("note")]
         public string Note { get; set; }
 
+        /// TODO: Need revisit
         /// <summary>
         /// Extra information that is added to the order.
         /// </summary>
         [JsonProperty("note_attributes")]
-        public IEnumerable<NoteAttribute> NoteAttributes { get; set; }
+        public Dictionary<string, string> NoteAttributes { get; set; }
 
         /// <summary>
         /// The website that the customer clicked on to come to the shop.
