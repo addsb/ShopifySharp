@@ -30,5 +30,13 @@ namespace ShopifySharp
         /// </remarks>
         [JsonProperty("id")]
         public new string Id { get; set; }
+
+        /// <summary>
+        /// An array of custom information for an item that has been added to the cart.
+        /// Often used to provide product customization options.
+        /// An array of <see cref="TaxLine"/> objects, each of which details the taxes applicable to this <see cref="LineItem"/>.
+        /// </summary>
+        [JsonProperty("properties")]
+        public new Dictionary<string, string> Properties { get; set; }
     }
 }
