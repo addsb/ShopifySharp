@@ -156,5 +156,29 @@ namespace ShopifySharp
         /// This property is undocumented by Shopify.
         /// </summary>
         public bool? ProductExists { get; set; }
+
+        /// <summary>
+        /// This property is undocumented by Shopify.
+        /// </summary>
+        [JsonProperty("image_url")]
+        public string ImageUrl { get; set; }
+
+        /// <summary>
+        /// The original selling price of the product, if applicable.
+        /// </summary>
+        [JsonProperty("compare_at_price", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public decimal? CompareAtPrice { get; set; }
+
+        /// <summary>
+        /// The line price of the item, based on price multiplied by quantity
+        /// </summary>
+        [JsonProperty("line_price")]
+        public string LinePrice { get; set; }
+
+        /// <summary>
+        /// This property is undocumented by Shopify.
+        /// </summary>
+        [JsonProperty("applied_discounts")]
+        public IList<AppliedDiscount> AppliedDiscounts { get; set; }
     }
 }

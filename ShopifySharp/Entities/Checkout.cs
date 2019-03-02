@@ -252,6 +252,213 @@ namespace ShopifySharp
         /// </summary>
         [JsonProperty("customer")]
         public Customer Customer { get; set; }
+
+        /// <summary>
+        /// This property is undocumented by Shopify.
+        /// </summary>
+        [JsonProperty("clone_url")]
+        public string CloneUrl { get; set; }
+
+        /// <summary>
+        /// The three-letter code (ISO 4217 format) for the currency that the customer used for payment at checkout. For the shop's default currency, <see cref="ShopifySharp.Checkout.Currency"/>.
+        /// </summary>
+        [JsonProperty("presentment_currency")]
+        public string PresentmentCurrency { get; set; }
+
+        /// <summary>
+        /// The ID of the customer associated with this checkout.
+        /// </summary>
+        [JsonProperty("customer_id")]
+        public long? CustomerId { get; set; }
+
+        /// <summary>
+        /// The two or three letter language code, optionally followed by a region modifier. Example values could be 'en', 'en-CA', 'en-PIRATE'.
+        /// </summary>
+        [JsonProperty("customer_locale")]
+        public string CustomerLocale { get; set; }
+
+        /// <summary>
+        /// The unique identifier for the device.
+        /// </summary>
+        [JsonProperty("device_id")]
+        public string DeviceId { get; set; }
+
+        /// <summary>
+        /// The discount code that is applied to the checkout. 
+        /// This populates applied_discount with the appropriate metadata for that discount code. 
+        /// To remove a discount code, send an empty string or null.
+        /// </summary>
+        [JsonProperty("discount_code")]
+        public string DiscountCode { get; set; }
+
+        /// <summary>
+        /// This property is undocumented by Shopify.
+        /// </summary>
+        [JsonProperty("legal_notice_url")]
+        public string LegalNoticeUrl { get; set; }
+
+        /// <summary>
+        /// This property is undocumented by Shopify.
+        /// </summary>
+        [JsonProperty("location_id")]
+        public long? LocationId { get; set; }
+
+        /// <summary>
+        /// This property is undocumented by Shopify.
+        /// </summary>
+        [JsonProperty("order_id")]
+        public long? OrderId { get; set; }
+
+        /// <summary>
+        /// This property is undocumented by Shopify.
+        /// </summary>
+        [JsonProperty("order_status_url")]
+        public string OrderStatusUrl { get; set; }
+
+        /// <summary>
+        /// An object containing the ID, name, and status page URL of the associated order when the checkout is complete.
+        /// Default value: null.
+        /// </summary>
+        [JsonProperty("order")]
+        public CheckoutOrder Order { get; set; }
+
+        /// <summary>
+        /// The amount left to be paid in presentment currency.
+        /// This is equal to the sum of the checkout line prices, taxes, and shipping minus discounts and gift cards.
+        /// </summary>
+        [JsonProperty("payment_due")]
+        public string PaymentDue { get; set; }
+
+        /// <summary>
+        /// The URL that must be used to store credit cards in Shopify's card vault. 
+        /// These URLs are subject to change, so you should always use the one supplied here. 
+        /// The general pattern for the URLs is https://elb.deposit.shopifycs.com/sessions.
+        /// </summary>
+        [JsonProperty("payment_url")]
+        public string PaymentUrl { get; set; }
+
+        /// <summary>
+        /// he customer's phone number. A checkout needs to have a value for email or phone before it can be completed.
+        /// </summary>
+        [JsonProperty("phone")]
+        public string Phone { get; set; }
+
+        /// <summary>
+        /// This property is undocumented by Shopify.
+        /// </summary>
+        [JsonProperty("shopify_payments_account_id")]
+        public string ShopifyPaymentsAccountId { get; set; }
+
+        /// <summary>
+        /// This property is undocumented by Shopify.
+        /// </summary>
+        [JsonProperty("privacy_policy_url")]
+        public string PrivacyPolicyUrl { get; set; }
+
+        /// <summary>
+        /// This property is undocumented by Shopify.
+        /// </summary>
+        [JsonProperty("refund_policy_url")]
+        public string RefundPolicyUrl { get; set; }
+
+        /// <summary>
+        /// Whether the fulfillment requires shipping.
+        /// </summary>
+        [JsonProperty("requires_shipping")]
+        public bool RequiresShipping { get; set; }
+
+        /// <summary>
+        /// The time in seconds that the line item products will be held. Default value: 0. This property is not writable.
+        /// </summary>
+        [JsonProperty("reservation_time_left")]
+        public long? ReservationTimeLeft { get; set; }
+
+        /// <summary>
+        /// The reservation time in seconds for the line item products. Default value: null. This property is not writable.
+        /// </summary>
+        [JsonProperty("reservation_time")]
+        public long? ReservationTime { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("shipping_policy_url")]
+        public string ShippingPolicyUrl { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("tax_exempt")]
+        public bool TaxExempt { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("terms_of_sale_url")]
+        public string TermsOfSaleUrl { get; set; }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("terms_of_service_url")]
+        public string TermsOfServiceUrl { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("total_tip_received")]
+        public decimal? TotalTipReceived { get; set; }
+
+        /// <summary>
+        /// The ID of the user who created the checkout. This value is passed to the order. Default value: null.
+        /// </summary>
+        [JsonProperty("user_id")]
+        public long? UserId { get; set; }
+
+        /// <summary>
+        /// The URL pointing to the checkout accessible from the web.
+        /// </summary>
+        [JsonProperty("web_url")]
+        public string WebUrl { get; set; }
+
+        /// <summary>
+        /// A list of gift card objects, each containing information about a gift card applied to this checkout. 
+        /// Gift cards can be applied to a checkout by passing { "checkout": { "gift_cards": [{ "code": "a gift card code" }, { "code": "another gift card code" }] } }.
+        /// Each gift card object has the following properties:
+        /// amount_used: The amount of the gift card used by this checkout in presentment currency.
+        /// code: The gift card code.
+        /// balance: The amount left on the gift card after being applied to this checkout in presentment currency.
+        /// id: The ID for the applied gift card.
+        /// last_characters: The last four characters of the applied gift card for display back to the user.
+        /// Updating the gift card list overwrites any previous list already defined in the checkout. To remove a gift card from the list of applied gift cards, re-apply the gift_cards array without that gift card.
+        /// </summary>
+        [JsonProperty("gift_cards")]
+        public IList<CheckoutGiftCard> GiftCards { get; set; }
+
+        /// <summary>
+        /// The selected shipping rate. A new shipping rate can be selected by updating the value for handle. 
+        /// A shipping line is required when requires_shipping is true. Learn more about selecting shipping rates <see cref="ShopifySharp.CheckoutShippingRate"/>.
+        /// </summary>
+        [JsonProperty("shipping_line")]
+        public CheckoutShippingLine ShippingLine { get; set; }
+
+        /// <summary>
+        /// The selected shipping rate. This property is not writable.
+        /// </summary>
+        [JsonProperty("shipping_rate")]
+        public CheckoutShippingRate shipping_rate { get; set; }
+
+        /// <summary>
+        /// The discount metadata generated by applying a discount code. A custom discount can also be added by specifying values for amount, title, description, value, and value_type.
+        /// amount: The amount that is deducted from payment_due in presentment currency.
+        /// title: The title to categorize the applied discount.
+        /// description: The description of the applied discount.
+        /// value: The value that was used to calculate the final applied discount amount.
+        /// value_type: The type of value that was used to calculate the final applied discount amount. Valid values: fixed_amount and percentage.
+        /// non_applicable_reason: The reason why the discount is not applicable, if the discount cannot be applied to the checkout.
+        /// applicable: Whether this discount code can be applied to the checkout.
+        /// </summary>
+        [JsonProperty("applied_discount")]
+        public AppliedDiscount AppliedDiscount { get; set; }
     }
 }

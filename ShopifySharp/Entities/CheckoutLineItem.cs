@@ -21,5 +21,14 @@ namespace ShopifySharp
         /// </summary>
         [JsonProperty("origin_location_id")]
         public long? OriginLocationId { get; set; }
+
+        /// <summary>
+        /// The object's unique id.
+        /// </summary>
+        /// <remarks>
+        /// The CheckoutLineItem seem is using string instead of interger/long.
+        /// </remarks>
+        [JsonProperty("id")]
+        public new string Id { get; set; }
     }
 }
