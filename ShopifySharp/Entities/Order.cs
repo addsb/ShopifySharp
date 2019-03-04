@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using ShopifySharp.Converters;
 using ShopifySharp.Enums;
 using System;
 using System.Collections.Generic;
@@ -359,5 +360,95 @@ namespace ShopifySharp
         /// </summary>
         [JsonProperty("metafields")]
         public IEnumerable<MetaField> Metafields { get; set; }
+
+        /// <summary>
+        /// The payment gateway used.
+        /// </summary>
+        [JsonProperty("gateway")]
+        public string Gateway { get; set; }
+
+        /// <summary>
+        /// Whether this is a test order.
+        /// </summary>
+        [JsonProperty("test"), JsonConverter(typeof(FalseToNullConverter))]
+        public bool? Test { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("confirmed")]
+        public bool? Confirmed { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("checkout_token")]
+        public string CheckoutToken { get; set; }
+ 
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("source_identifier")]
+        public string SourceIdentifier { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("source_url")]
+        public string SourceUrl { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("landing_site_ref")]
+        public string LandingSiteRef { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("checkout_id")]
+        public long? CheckoutId { get; set; }
+
+        /// <summary>
+        /// he presentment currency that was used to display prices to the customer.
+        /// </summary>
+        [JsonProperty("presentment_currency")]
+        public string PresentmentCurrency { get; set; }
+
+        /// <summary>
+        /// The total of all line item prices in shop and presentment currencies.
+        /// </summary>
+        [JsonProperty("total_line_items_price_set")]
+        public TotalLineItemsPriceSet TotalLineItemsPriceSet { get; set; }
+
+        /// <summary>
+        /// The total discounts applied to the price of the order in shop and presentment currencies.
+        /// </summary>
+        [JsonProperty("total_discounts_set")]
+        public TotalDiscountsSet TotalDiscountsSet { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("total_shipping_price_set")]
+        public TotalShippingPriceSet TotalShippingPriceSet { get; set; }
+
+        /// <summary>
+        /// The subtotal of the order in shop and presentment currencies.
+        /// </summary>
+        [JsonProperty("subtotal_price_set")]
+        public SubtotalPriceSet subtotal_price_set { get; set; }
+
+        /// <summary>
+        /// The total price of the order in shop and presentment currencies.
+        /// </summary>
+        [JsonProperty("total_price_set")]
+        public TotalPriceSet total_price_set { get; set; }
+
+        /// <summary>
+        /// The total tax applied to the order in shop and presentment currencies.
+        /// </summary>
+        [JsonProperty("total_tax_set")]
+        public TotalTaxSet TotalTaxSet { get; set; }
     }
 }
